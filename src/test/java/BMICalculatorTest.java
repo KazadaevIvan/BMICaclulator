@@ -54,6 +54,25 @@ public class BMICalculatorTest {
         assertEquals(actualResult, expectedResult);
     }
 
+    @Test
+    public void checkObeseCategoryWithKgCms() {
+
+        WebElement weightInput = driver.findElement(By.name("wg"));
+        weightInput.sendKeys("100");
+
+        WebElement heightInput = driver.findElement(By.name("ht"));
+        heightInput.sendKeys("175");
+
+        WebElement calculateButton = driver.findElement(By.name("cc"));
+        calculateButton.click();
+
+        WebElement categoryPole = driver.findElement(By.name("desc"));
+        String actualResult = categoryPole.getAttribute("value");
+
+        String expectedResult = "Your category is Obese";
+
+        assertEquals(actualResult, expectedResult);
+    }
 
     @AfterMethod
     public void tearDown() {
