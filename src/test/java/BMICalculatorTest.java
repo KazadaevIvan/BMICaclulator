@@ -101,6 +101,37 @@ public class BMICalculatorTest {
         assertEquals(actualResult, expectedResult);
     }
 
+    @Test
+    public void checkNormalCategoryAfterSwitchingWeightAndHeightUnits() {
+
+        WebElement weightInput = driver.findElement(By.name("wg"));
+        weightInput.sendKeys("75");
+
+        WebElement heightInput = driver.findElement(By.name("ht"));
+        heightInput.sendKeys("185");
+
+        WebElement calculateButton = driver.findElement(By.name("cc"));
+        calculateButton.click();
+
+        WebElement categoryPole = driver.findElement(By.name("desc"));
+        String kgCmResult = categoryPole.getAttribute("value");
+
+        Select weightUnits = new Select(driver.findElement(By.name("opt1")));
+        weightUnits.selectByValue("pounds");
+
+        Select heightFt = new Select(driver.findElement(By.name("opt2")));
+        heightFt.selectByValue("6");
+
+        Select heightInches = new Select(driver.findElement(By.name("opt3")));
+        heightInches.selectByValue("1");
+
+        calculateButton.click();
+
+        String lbFtInchResult = categoryPole.getAttribute("value");
+
+        assertEquals(lbFtInchResult, kgCmResult);
+    }
+
     @AfterMethod
     public void tearDown() {
         driver.quit();
