@@ -33,6 +33,28 @@ public class BMICalculatorTest {
 
         assertEquals(actualResult, expectedResult);
     }
+
+    @Test
+    public void checkUnderweightCategoryWithKgCms() {
+
+        WebElement weightInput = driver.findElement(By.name("wg"));
+        weightInput.sendKeys("45");
+
+        WebElement heightInput = driver.findElement(By.name("ht"));
+        heightInput.sendKeys("170");
+
+        WebElement calculateButton = driver.findElement(By.name("cc"));
+        calculateButton.click();
+
+        WebElement categoryPole = driver.findElement(By.name("desc"));
+        String actualResult = categoryPole.getAttribute("value");
+
+        String expectedResult = "Your category is Underweight";
+
+        assertEquals(actualResult, expectedResult);
+    }
+
+
     @AfterMethod
     public void tearDown() {
         driver.quit();
